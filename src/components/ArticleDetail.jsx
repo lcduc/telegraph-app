@@ -91,8 +91,8 @@ export default function ArticleDetail() {
           {/* Split HTML by image placeholder and render with image */}
           {(() => {
             const sections = [];
-            const imagePlaceholders = [...(article.body.matchAll(/[\[\{]img(\d+)[\]\}]/g) || [])];
-            const parts = article.body.split(/[\[\{]img\d+[\]\}]/);
+            const imagePlaceholders = [...(article.body.matchAll(/[\[{]img(\d+)[\]}]/g) || [])];
+            const parts = article.body.split(/[\[{]img\d+[\]}]/);
             
             // Combine parts with image numbers
             for (let i = 0; i < parts.length; i++) {
