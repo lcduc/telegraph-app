@@ -64,7 +64,7 @@ export default function NewsGrid() {
     <section className="bg-white">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {Object.entries(categoryArticles).map(([category, { featured, sidebar }], catIndex) => (
-          <div key={category} className="mb-12 animate-slide-up" style={{ animationDelay: `${0.1 + catIndex * 0.1}s` }}>
+          <div key={category} className="mb-12">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-black text-gray-900">{category}</h2>
               <button 
@@ -83,8 +83,7 @@ export default function NewsGrid() {
                     navigate(`/article/${featured[0].id}`);
                     window.scrollTo(0, 0);
                   }}
-                  className="border border-gray-200 rounded overflow-hidden hover:shadow-lg transition-shadow cursor-pointer animate-slide-up hover:scale-105 transition-transform duration-300"
-                  style={{ animationDelay: '0.1s' }}
+                  className="border border-gray-200 rounded overflow-hidden hover:shadow-lg transition-shadow cursor-pointer hover:scale-105 transition-transform duration-300"
                 >
                   <div className="h-48 bg-gradient-to-br from-gray-400 to-gray-500 overflow-hidden">
                     <img src={featured[0].image} alt={featured[0].title} className="w-full h-full object-cover" />
@@ -116,8 +115,7 @@ export default function NewsGrid() {
                     navigate(`/article/${featured[1].id}`);
                     window.scrollTo(0, 0);
                   }}
-                  className="border border-gray-200 rounded overflow-hidden hover:shadow-lg transition-shadow cursor-pointer animate-slide-up hover:scale-105 transition-transform duration-300"
-                  style={{ animationDelay: '0.2s' }}
+                  className="border border-gray-200 rounded overflow-hidden hover:shadow-lg transition-shadow cursor-pointer hover:scale-105 transition-transform duration-300"
                 >
                   <div className="h-48 bg-gradient-to-br from-gray-400 to-gray-500 overflow-hidden">
                     <img src={featured[1].image} alt={featured[1].title} className="w-full h-full object-cover" />
@@ -144,7 +142,7 @@ export default function NewsGrid() {
 
               {/* Right Column - Sidebar Articles */}
               {sidebar.length > 0 && (
-                <div className="flex flex-col border border-gray-200 rounded overflow-hidden animate-slide-up" style={{ animationDelay: '0.3s' }}>
+                <div className="flex flex-col border border-gray-200 rounded overflow-hidden">
                   {sidebar.map((article, index) => (
                     <button
                       key={article.id}
@@ -155,7 +153,6 @@ export default function NewsGrid() {
                       className={`flex-1 p-4 hover:bg-red-50 transition text-left flex flex-col justify-center hover:text-red-600 ${
                         index !== sidebar.length - 1 ? 'border-b border-gray-200' : ''
                       }`}
-                      style={{ animationDelay: `${0.3 + index * 0.05}s` }}
                     >
                       <p className="text-xs text-red-600 font-black uppercase mb-2">
                         {article.category}

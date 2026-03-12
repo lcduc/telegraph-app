@@ -16,8 +16,7 @@ export default function ArticleSection({ articles }) {
             navigate(`/article/${left.id}`);
             window.scrollTo(0, 0);
           }}
-          className="border border-gray-200 rounded overflow-hidden hover:shadow-lg transition-shadow cursor-pointer animate-slide-up hover:scale-105 transition-transform duration-300"
-          style={{ animationDelay: '0.1s' }}
+          className="border border-gray-200 rounded overflow-hidden hover:shadow-lg transition-shadow cursor-pointer hover:scale-105 transition-transform duration-300"
         >
           <div className="h-48 bg-gradient-to-br from-gray-400 to-gray-500 overflow-hidden">
             <img src={left.image} alt={left.title} className="w-full h-full object-cover" />
@@ -49,8 +48,7 @@ export default function ArticleSection({ articles }) {
             navigate(`/article/${middle.id}`);
             window.scrollTo(0, 0);
           }}
-          className="border border-gray-200 rounded overflow-hidden hover:shadow-lg transition-shadow cursor-pointer animate-slide-up hover:scale-105 transition-transform duration-300"
-          style={{ animationDelay: '0.2s' }}
+          className="border border-gray-200 rounded overflow-hidden hover:shadow-lg transition-shadow cursor-pointer hover:scale-105 transition-transform duration-300"
         >
           <div className="h-48 bg-gradient-to-br from-gray-400 to-gray-500 overflow-hidden">
             <img src={middle.image} alt={middle.title} className="w-full h-full object-cover" />
@@ -77,7 +75,7 @@ export default function ArticleSection({ articles }) {
 
       {/* Right Column - Sidebar Articles */}
       {sidebar.length > 0 && (
-        <div className="flex flex-col border border-gray-200 rounded overflow-hidden animate-slide-up" style={{ animationDelay: '0.3s' }}>
+        <div className="flex flex-col border border-gray-200 rounded overflow-hidden">
           {sidebar.map((article, index) => (
             <button
               key={article.id}
@@ -88,7 +86,6 @@ export default function ArticleSection({ articles }) {
               className={`flex-1 p-4 hover:bg-red-50 transition text-left flex flex-col justify-center hover:text-red-600 ${
                 index !== sidebar.length - 1 ? 'border-b border-gray-200' : ''
               }`}
-              style={{ animationDelay: `${0.3 + index * 0.05}s` }}
             >
               <p className="text-xs text-red-600 font-black uppercase mb-2">
                 {article.category}

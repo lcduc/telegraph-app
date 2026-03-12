@@ -68,8 +68,8 @@ export default function CategoryPage() {
     <section className="bg-white">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8 animate-fade-in">
-          <h1 className="text-3xl font-black text-gray-900 animate-slide-up" style={{ animationDelay: '0.1s' }}>{categoryName.toUpperCase()}</h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-black text-gray-900">{categoryName.toUpperCase()}</h1>
           <button 
             onClick={() => navigate('/')}
             className="text-blue-600 hover:underline text-sm font-bold hover:text-blue-800 transition-colors duration-300"
@@ -80,7 +80,7 @@ export default function CategoryPage() {
 
         {/* Sections */}
         {sections.map((sectionArticles, sectionIdx) => (
-          <div key={sectionIdx} className="mb-12 animate-slide-up" style={{ animationDelay: `${0.2 + sectionIdx * 0.15}s` }}>
+          <div key={sectionIdx} className="mb-12">
             <ArticleSection articles={sectionArticles} />
             
             {/* Divider between sections */}
