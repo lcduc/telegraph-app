@@ -16,8 +16,17 @@ export default function CategoryPage() {
       .then(data => {
         // Filter by category (case-insensitive)
         const filtered = data.filter(a => a.category === categoryName.toUpperCase());
-        // Sort by date descending (latest first)
-        filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        // Sort by date descending (latest first) with proper date parsing
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        filtered.sort((a, b) => {
+          const parseDate = (dateStr) => {
+            const [day, month, year] = dateStr.split(' ');
+            const monthIndex = monthNames.indexOf(month);
+            return new Date(year, monthIndex, day);
+          };
+          return parseDate(b.date) - parseDate(a.date);
+        });
         
         if (filtered.length === 0) {
           setError(`No articles found for ${categoryName}`);
