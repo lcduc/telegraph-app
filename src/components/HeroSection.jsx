@@ -6,7 +6,7 @@ export default function HeroSection() {
   return (
     <section className="bg-gray-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="bg-white rounded p-6 cursor-pointer hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]" onClick={() => navigate('/article/1')}>
+        <div className="bg-white rounded p-6 cursor-pointer hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]">
           <div className="text-sm font-bold text-red-600 mb-3 uppercase">FA CUP</div>
           <div className="flex items-center justify-between">
             <div>
