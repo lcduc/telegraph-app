@@ -24,10 +24,23 @@ export default function NewsGrid() {
 
         // Transform into featured + sidebar structure
         const categoryData = {};
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        
+        
         Object.entries(grouped).forEach(([category, articles]) => {
+          // Sort articles within category by date (newest first)
+          const sorted = articles.sort((a, b) => {
+            const parseDate = (dateStr) => {
+              const [day, month, year] = dateStr.split(' ');
+              const monthIndex = monthNames.indexOf(month);
+              return new Date(year, monthIndex, day);
+            };
+            return parseDate(b.date) - parseDate(a.date);
+          });
+          
           categoryData[category] = {
-            featured: articles.slice(0, 2),
-            sidebar: articles.slice(2, 6) // Max 6 items: 2 featured + 4 sidebar
+            featured: sorted.slice(0, 2),
+            sidebar: sorted.slice(2, 6) // Max 6 items: 2 featured + 4 sidebar
           };
         });
 
