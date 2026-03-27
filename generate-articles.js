@@ -18,7 +18,7 @@ async function generateArticles() {
   const articles = [];
   let articleId = 1;
 
-  // Scan all date folders (dd_mm_yyyy format)
+  // Scan all date folders (yyyy_mm_dd format)
   const dateFolders = fs.readdirSync(DATA_DIR);
 
   for (const dateFolder of dateFolders) {
@@ -151,13 +151,18 @@ async function generateArticles() {
           const title = (lines[0] || 'Untitled').substring(0, 100);
           const excerpt = lines.slice(1, 3).join(' ').substring(0, 150) + '...';
 
+          // Parse date from folder name (DD_MM_YYYY format)
+          const [day, month, year] = dateFolder.split('_');
+          const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+          const formattedDate = `${parseInt(day)} ${monthNames[parseInt(month) - 1]} ${year}`;
+
           const article = {
             id: articleId,
             title: title,
             category: category.toUpperCase(),
             author: 'Telegraph Sports',
             authorTitle: 'Sports Correspondent',
-            date: new Date().toISOString().split('T')[0],
+            date: formattedDate,
             image: primaryImage,
             images: imagesMap, // Store all images keyed by img1, img2, etc
             excerpt: excerpt,
@@ -176,6 +181,22 @@ async function generateArticles() {
       }
     }
   }
+
+  // Sort articles by date (newest first)
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  articles.sort((a, b) => {
+    const parseDate = (dateStr) => {
+      const [day, month, year] = dateStr.split(' ');
+      const monthIndex = monthNames.indexOf(month);
+      return new Date(year, monthIndex, day);
+    };
+    return parseDate(b.date) - parseDate(a.date);
+  });
+
+  // Re-assign IDs after sorting
+  articles.forEach((article, index) => {
+    article.id = index + 1;
+  });
 
   // Add related articles (link each article to similar ones)
   for (let i = 0; i < articles.length; i++) {

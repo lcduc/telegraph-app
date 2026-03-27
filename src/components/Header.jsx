@@ -34,16 +34,16 @@ export default function Header() {
       <div className="bg-blue-900 text-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex gap-6 overflow-x-auto py-2 text-xs font-bold whitespace-nowrap">
-            <button className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Football</button>
-            <button className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Rugby Union</button>
-            <button className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Cricket</button>
-            <button className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Golf</button>
-            <button className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Tennis</button>
-            <button className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Boxing</button>
-            <button className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Water Polo</button>
-            <button className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Cycling</button>
-            <button className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Sailing</button>
-            <button className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Racing</button>
+            <button onClick={() => { navigate('/category/football'); window.scrollTo(0, 0); }} className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Football</button>
+            <button onClick={() => { navigate('/category/rugby union'); window.scrollTo(0, 0); }} className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Rugby Union</button>
+            <button onClick={() => { navigate('/category/cricket'); window.scrollTo(0, 0); }} className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Cricket</button>
+            <button onClick={() => { navigate('/category/golf'); window.scrollTo(0, 0); }} className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Golf</button>
+            <button onClick={() => { navigate('/category/tennis'); window.scrollTo(0, 0); }} className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Tennis</button>
+            <button onClick={() => { navigate('/category/boxing'); window.scrollTo(0, 0); }} className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Boxing</button>
+            <button onClick={() => { navigate('/category/water polo'); window.scrollTo(0, 0); }} className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Water Polo</button>
+            <button onClick={() => { navigate('/category/cycling'); window.scrollTo(0, 0); }} className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Cycling</button>
+            <button onClick={() => { navigate('/category/sailing'); window.scrollTo(0, 0); }} className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Sailing</button>
+            <button onClick={() => { navigate('/category/racing'); window.scrollTo(0, 0); }} className="hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform">Racing</button>
           </div>
         </div>
       </div>
