@@ -160,6 +160,7 @@ async function generateArticles() {
             id: articleId,
             title: title,
             category: category.toUpperCase(),
+            featured: articleId <= 3,
             author: 'Telegraph Sports',
             authorTitle: 'Sports Correspondent',
             date: formattedDate,

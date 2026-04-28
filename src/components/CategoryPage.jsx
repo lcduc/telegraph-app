@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ArticleSection from './ArticleSection';
+import { loadArticlesJson } from '../utils/loadArticlesJson';
 
 export default function CategoryPage() {
   const navigate = useNavigate();
@@ -9,13 +10,22 @@ export default function CategoryPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const normalizeCategory = value => value.toString().trim().toLowerCase().replace(/[-_\s]+/g, '');
+
   useEffect(() => {
+    const categoryAliases = {
+      racing: 'f1',
+      formula1: 'f1'
+    };
+
     // Load articles from JSON file
-    fetch('/articles.json')
-      .then(res => res.json())
+    loadArticlesJson()
       .then(data => {
-        // Filter by category (case-insensitive)
-        const filtered = data.filter(a => a.category === categoryName.toUpperCase());
+        const normalizedParam = normalizeCategory(categoryName);
+        const normalizedTarget = categoryAliases[normalizedParam] || normalizedParam;
+
+        // Filter by category using a normalized slug so small data variations still match
+        const filtered = data.filter(a => normalizeCategory(a.category) === normalizedTarget);
         // Sort by date descending (latest first)
         filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
         
@@ -26,7 +36,7 @@ export default function CategoryPage() {
         }
       })
       .catch(err => {
-        setError('Failed to load articles');
+        setError(`Failed to load articles: ${err.message}`);
         console.error(err);
       })
       .finally(() => setLoading(false));

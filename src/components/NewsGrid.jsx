@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { loadArticlesJson } from '../utils/loadArticlesJson';
 
 export default function NewsGrid() {
   const navigate = useNavigate();
@@ -9,8 +10,7 @@ export default function NewsGrid() {
 
   useEffect(() => {
     // Load articles from JSON file
-    fetch('/articles.json')
-      .then(res => res.json())
+    loadArticlesJson()
       .then(data => {
         // Group articles by category
         const grouped = {};
@@ -38,7 +38,7 @@ export default function NewsGrid() {
         setCategoryArticles(categoryData);
       })
       .catch(err => {
-        setError('Failed to load articles');
+        setError(`Failed to load articles: ${err.message}`);
         console.error(err);
       })
       .finally(() => setLoading(false));

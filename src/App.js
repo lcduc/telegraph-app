@@ -1,8 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import NewsGrid from './components/NewsGrid';
+import MainLayout from './components/MainLayout';
 import ArticleDetail from './components/ArticleDetail';
 import CategoryPage from './components/CategoryPage';
 
@@ -12,12 +11,7 @@ function App() {
       <div className="bg-white min-h-screen">
         <Header />
         <Routes>
-          <Route path="/" element={
-            <>
-              <HeroSection />
-              <NewsGrid />
-            </>
-          } />
+          <Route path="/" element={<MainLayout />} />
           <Route path="/article/:id" element={<ArticleDetail />} />
           <Route path="/category/:categoryName" element={<CategoryPage />} />
         </Routes>

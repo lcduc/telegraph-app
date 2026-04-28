@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { loadArticlesJson } from "../utils/loadArticlesJson";
 
 export default function ArticleDetail() {
   const { id } = useParams();
@@ -11,8 +12,7 @@ export default function ArticleDetail() {
 
   useEffect(() => {
     // Load articles from JSON file
-    fetch("/articles.json")
-      .then((res) => res.json())
+    loadArticlesJson()
       .then((data) => {
         setAllArticles(data);
         const found = data.find((a) => a.id === parseInt(id));
@@ -23,7 +23,7 @@ export default function ArticleDetail() {
         }
       })
       .catch((err) => {
-        setError("Failed to load article");
+        setError(`Failed to load article: ${err.message}`);
         console.error(err);
       })
       .finally(() => setLoading(false));
