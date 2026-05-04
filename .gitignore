@@ -19,9 +19,6 @@
 .env.test.local
 .env.production.local
 
-# images directory (served from Cloudinary)
-/public/images/
-
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
