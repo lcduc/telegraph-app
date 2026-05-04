@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BrandingAd from './BrandingAd';
 import { loadArticlesJson } from '../utils/loadArticlesJson';
 
 export default function MainLayout() {
@@ -81,8 +82,11 @@ export default function MainLayout() {
   const footballSection = articles
     .filter(article => article.category === 'FOOTBALL' && !usedFirstSectionIds.has(article.id))
     .slice(0, 5);
-  const sportSection = articles
-    .filter(article => ['F1', 'TENNIS'].includes(article.category) && !usedFirstSectionIds.has(article.id))
+  const tennisSection = articles
+    .filter(article => article.category === 'TENNIS' && !usedFirstSectionIds.has(article.id))
+    .slice(0, 5);
+  const f1Section = articles
+    .filter(article => article.category === 'F1' && !usedFirstSectionIds.has(article.id))
     .slice(0, 5);
   const multimediaArticles = articles.slice(14, 20);
   const multimediaCount = multimediaArticles.length;
@@ -263,15 +267,9 @@ export default function MainLayout() {
               </div>
             </div>
 
-            {/* ADVERTISEMENT PLACEHOLDER */}
-            <div className="mt-4">
-              <div className="w-full h-[600px] bg-gray-100 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 rounded-lg select-none">
-                <svg className="w-12 h-12 mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                </svg>
-                <p className="font-bold text-sm tracking-widest uppercase">Advertisement</p>
-                <p className="text-xs mt-1">300 x 600</p>
-              </div>
+            {/* Advertisement */}
+            <div className="mb-8">
+              <BrandingAd adKey="branding" />
             </div>
           </div>
         </div>
@@ -426,7 +424,7 @@ export default function MainLayout() {
               <div className="px-4 py-4 border-b border-gray-200">
                 <div className="flex flex-col gap-3">
                   <h2 className="text-2xl font-black text-gray-900">
-                    <span className="border-l-4 border-red-600 pl-3">Bóng đá Việt Nam</span>
+                    <span className="border-l-4 border-red-600 pl-3">Bóng đá</span>
                   </h2>
                   <div className="flex flex-wrap gap-2 text-xs font-bold uppercase text-gray-600">
                     {['V-League', 'Các ĐTQG', 'Lịch thi đấu', 'Kết quả', 'Bảng xếp hạng'].map(item => (
@@ -470,10 +468,10 @@ export default function MainLayout() {
               <div className="px-4 py-4 border-b border-gray-200">
                 <div className="flex flex-col gap-3">
                   <h2 className="text-2xl font-black text-gray-900">
-                    <span className="border-l-4 border-red-600 pl-3">Thể thao</span>
+                    <span className="border-l-4 border-red-600 pl-3">Tennis</span>
                   </h2>
                   <div className="flex flex-wrap gap-2 text-xs font-bold uppercase text-gray-600">
-                    {['Bóng chuyền', 'Pickleball', 'Chạy', 'Tennis', 'Billiards Snooker', 'Golf'].map(item => (
+                    {['Grand Slam', 'ATP', 'WTA', 'Bảng xếp hạng', 'Lịch thi đấu'].map(item => (
                       <span key={item} className="px-3 py-1 rounded-full bg-gray-100">
                         {item}
                       </span>
@@ -483,7 +481,51 @@ export default function MainLayout() {
               </div>
 
               <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {sportSection.map((article, index) => (
+                {tennisSection.map((article, index) => (
+                  <div
+                    key={article.id}
+                    className={`group cursor-pointer ${index === 0 ? 'sm:col-span-2 flex flex-col sm:flex-row gap-4' : 'flex gap-4'}`}
+                    onClick={() => navigate(`/article/${article.id}`)}
+                  >
+                    <div className={`${index === 0 ? 'sm:w-1/2' : 'w-24'} shrink-0 overflow-hidden rounded bg-gray-100 ${index === 0 ? 'aspect-[16/10]' : 'aspect-square'}`}>
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <h3 className={`font-bold text-gray-900 group-hover:text-red-600 leading-snug line-clamp-3 ${index === 0 ? 'text-lg sm:text-2xl' : 'text-sm sm:text-base'}`}>
+                        {article.title}
+                      </h3>
+                      <p className="text-xs text-gray-600 mt-1 line-clamp-2">
+                        {article.excerpt}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+              <div className="px-4 py-4 border-b border-gray-200">
+                <div className="flex flex-col gap-3">
+                  <h2 className="text-2xl font-black text-gray-900">
+                    <span className="border-l-4 border-red-600 pl-3">F1</span>
+                  </h2>
+                  <div className="flex flex-wrap gap-2 text-xs font-bold uppercase text-gray-600">
+                    {['Races', 'Drivers', 'Constructors', 'Bảng xếp hạng', 'Lịch thi đấu'].map(item => (
+                      <span key={item} className="px-3 py-1 rounded-full bg-gray-100">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {f1Section.map((article, index) => (
                   <div
                     key={article.id}
                     className={`group cursor-pointer ${index === 0 ? 'sm:col-span-2 flex flex-col sm:flex-row gap-4' : 'flex gap-4'}`}
@@ -584,9 +626,8 @@ export default function MainLayout() {
               </div>
             </div>
 
-            <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-400 h-[250px] select-none">
-              <p className="font-bold text-sm tracking-widest uppercase">Advertisement</p>
-              <p className="text-xs mt-1">300 x 250</p>
+            <div className="mt-4">
+              <BrandingAd adKey="dhc" />
             </div>
           </div>
         </div>
