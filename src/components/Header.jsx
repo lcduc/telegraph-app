@@ -66,25 +66,26 @@ export default function Header() {
               onClick={() => goToCategory("football")}
               className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
             >
-              Football
+              Bóng đá
             </button>
             <button
               type="button"
+              onClick={() => goToCategory("basketball")}
               className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
             >
-              Rugby Union
-            </button>
-            <button
-              type="button"
-              className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
-            >
-              Cricket
+              Bóng rổ
             </button>
             <button
               type="button"
               className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
             >
               Golf
+            </button>
+            <button
+              type="button"
+              className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
+            >
+              Đấm bốc
             </button>
             <button
               type="button"
@@ -97,32 +98,14 @@ export default function Header() {
               type="button"
               className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
             >
-              Boxing
-            </button>
-            <button
-              type="button"
-              className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
-            >
-              Water Polo
-            </button>
-            <button
-              type="button"
-              className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
-            >
-              Cycling
-            </button>
-            <button
-              type="button"
-              className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
-            >
-              Sailing
+              Đạp xe
             </button>
             <button
               type="button"
               onClick={() => goToCategory("f1")}
               className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
             >
-              Racing
+              F1
             </button>
           </div>
         </div>
