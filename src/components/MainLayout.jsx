@@ -11,11 +11,24 @@ export default function MainLayout() {
   const [multimediaIndex, setMultimediaIndex] = useState(0);
   const [carouselResetToken, setCarouselResetToken] = useState(0);
   const [now, setNow] = useState(new Date());
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     const clock = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(clock);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     loadArticlesJson()
@@ -679,6 +692,29 @@ export default function MainLayout() {
           </div>
         </div>
       </div>
+
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-red-600 hover:bg-red-700 text-white rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 z-40"
+          title="Back to top"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 10l7-7m0 0l7 7m-7-7v18"
+            />
+          </svg>
+        </button>
+      )}
     </section>
   );
 }

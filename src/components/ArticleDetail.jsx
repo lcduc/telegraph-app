@@ -102,17 +102,20 @@ export default function ArticleDetail() {
         <div
           className="prose prose-sm max-w-none mb-12"
         >
-          {/* Split HTML by image placeholder and render with image */}
+          {/* Split HTML by image and video placeholders and render accordingly */}
           {(() => {
             const sections = [];
-            const imagePlaceholders = [...(article.body.matchAll(/[[{]img(\d+)[\]}]/g) || [])];
-            const parts = article.body.split(/[[{]img\d+[\]}]/);
+            // Match both [img1], {img1}, [vid1], {vid1}, etc.
+            const allPlaceholders = [...(article.body.matchAll(/[[{](img|vid)(\d+)[\]}]/g) || [])];
+            // Split by both image and video placeholders
+            const parts = article.body.split(/[[{](?:img|vid)\d+[\]}]/);
             
-            // Combine parts with image numbers
+            // Combine parts with placeholder type and numbers
             for (let i = 0; i < parts.length; i++) {
               sections.push({
                 content: parts[i],
-                imageNum: imagePlaceholders[i]?.[1],
+                placeholderType: allPlaceholders[i]?.[1], // 'img' or 'vid'
+                placeholderNum: allPlaceholders[i]?.[2],
               });
             }
 
@@ -185,14 +188,30 @@ export default function ArticleDetail() {
                   />
 
                   {/* Render image if there's a corresponding image in the map */}
-                  {section.imageNum &&
+                  {section.placeholderType === 'img' &&
+                    section.placeholderNum &&
                     article.images &&
-                    article.images[`img${section.imageNum}`] && (
+                    article.images[`img${section.placeholderNum}`] && (
                       <div className="my-8 rounded-lg overflow-hidden">
                         <img
-                          src={article.images[`img${section.imageNum}`]}
+                          src={article.images[`img${section.placeholderNum}`]}
                           alt={article.title}
                           className="w-full"
+                        />
+                      </div>
+                    )}
+
+                  {/* Render video if there's a corresponding video in the map */}
+                  {section.placeholderType === 'vid' &&
+                    section.placeholderNum &&
+                    article.videos &&
+                    article.videos[`vid${section.placeholderNum}`] && (
+                      <div className="my-8 rounded-lg overflow-hidden">
+                        <video
+                          src={article.videos[`vid${section.placeholderNum}`]}
+                          controls
+                          className="w-full"
+                          controlsList="nodownload"
                         />
                       </div>
                     )}

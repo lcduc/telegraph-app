@@ -145,7 +145,41 @@ async function generateArticles() {
               }
             }
           }
-          
+
+          // Process video placeholders like [vid1], [vid2], etc.
+          const videosMap = {}; // Map of vid1 -> cloudinary video URL
+          const videoPlaceholderRegex = /[\[\{]vid(\d+)[\]\}]/gi;
+          const videoPlaceholders = [...plainText.matchAll(videoPlaceholderRegex)];
+          const videoExtensions = ['.mp4', '.webm', '.mov', '.avi'];
+
+          for (const match of videoPlaceholders) {
+            const vidNum = match[1];
+            const videoName = `vid${vidNum}`;
+
+            // Look for video file matching the placeholder
+            for (const ext of videoExtensions) {
+              const videoPath = path.join(newsPath, `${videoName}${ext}`);
+              if (fs.existsSync(videoPath)) {
+                try {
+                  // Upload to Cloudinary as video
+                  const result = await cloudinary.uploader.upload(videoPath, {
+                    folder: `telegraph/${dateFolder}/${category}/${newsFolder}`,
+                    public_id: `article-${articleId}-${vidNum}`,
+                    overwrite: true,
+                    resource_type: 'video'
+                  });
+
+                  videosMap[videoName] = result.secure_url;
+
+                  console.log(`  ✓ Uploaded to Cloudinary: ${videoName} (${result.public_id})`);
+                } catch (uploadError) {
+                  console.error(`  ✗ Failed to upload ${videoName}:`, uploadError.message);
+                }
+                break;
+              }
+            }
+          }
+
           // Parse plain text for title and excerpt
           const lines = plainText.split('\n').filter(l => l.trim());
           const title = (lines[0] || 'Untitled').substring(0, 100);
@@ -166,6 +200,7 @@ async function generateArticles() {
             date: formattedDate,
             image: primaryImage,
             images: imagesMap, // Store all images keyed by img1, img2, etc
+            videos: videosMap, // Store all videos keyed by vid1, vid2, etc
             excerpt: excerpt,
             body: htmlText, // Store HTML with formatting
             relatedArticles: []
