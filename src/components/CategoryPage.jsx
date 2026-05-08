@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ArticleSection from "./ArticleSection";
 import BrandingAd from "./BrandingAd";
 import { loadArticlesJson } from "../utils/loadArticlesJson";
+import { getCategoryLabel } from "../utils/getCategoryLabel";
 
 export default function CategoryPage() {
   const navigate = useNavigate();
@@ -82,7 +83,7 @@ export default function CategoryPage() {
             onClick={() => navigate("/")}
             className="text-blue-600 hover:underline mt-4"
           >
-            ← Back to Main
+            ← Trở về trang chủ
           </button>
         </div>
       </section>
@@ -103,13 +104,13 @@ export default function CategoryPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-black text-gray-900">
-            {categoryName.toUpperCase()}
+            {getCategoryLabel(categoryName)}
           </h1>
           <button
             onClick={() => navigate("/")}
             className="text-blue-600 hover:underline text-sm font-bold hover:text-blue-800 transition-colors duration-300"
           >
-            ← Back
+            ← Trở về trang chủ
           </button>
         </div>
 

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loadArticlesJson } from '../utils/loadArticlesJson';
+import { getCategoryLabel } from '../utils/getCategoryLabel';
+import { AUTHOR_AVATAR } from '../utils/authorAvatar';
+import { getAuthorDisplayName } from '../utils/authorDisplay';
 
 export default function NewsGrid() {
   const navigate = useNavigate();
@@ -70,12 +73,12 @@ export default function NewsGrid() {
         {Object.entries(categoryArticles).map(([category, { featured, sidebar }], catIndex) => (
           <div key={category} className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-black text-gray-900">{category}</h2>
+              <h2 className="text-2xl font-black text-gray-900">{getCategoryLabel(category)}</h2>
               <button 
                 onClick={() => navigate(`/category/${category.toLowerCase()}`)}
                 className="text-blue-900 font-bold hover:underline text-sm hover:text-blue-600 transition-colors duration-300"
               >
-                {category} →
+                {getCategoryLabel(category)} →
               </button>
             </div>
 
@@ -94,7 +97,7 @@ export default function NewsGrid() {
                   </div>
                   <div className="p-4">
                     <p className="text-xs text-red-600 font-black uppercase mb-2">
-                      {featured[0].category}
+                      {getCategoryLabel(featured[0].category)}
                     </p>
                     <h3 className="font-black text-sm leading-tight text-gray-900 mb-3 line-clamp-3">
                       {featured[0].title}
@@ -103,9 +106,9 @@ export default function NewsGrid() {
                       {featured[0].excerpt}
                     </p>
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-gray-300" />
+                      <img src={AUTHOR_AVATAR} alt={getAuthorDisplayName(featured[0].author)} className="w-6 h-6 rounded-full object-cover" />
                       <span className="text-xs font-semibold text-gray-700">
-                        {featured[0].author}
+                        {getAuthorDisplayName(featured[0].author)}
                       </span>
                     </div>
                   </div>
@@ -126,7 +129,7 @@ export default function NewsGrid() {
                   </div>
                   <div className="p-4">
                     <p className="text-xs text-red-600 font-black uppercase mb-2">
-                      {featured[1].category}
+                      {getCategoryLabel(featured[1].category)}
                     </p>
                     <h3 className="font-black text-sm leading-tight text-gray-900 mb-3 line-clamp-3">
                       {featured[1].title}
@@ -135,9 +138,9 @@ export default function NewsGrid() {
                       {featured[1].excerpt}
                     </p>
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-gray-300" />
+                      <img src={AUTHOR_AVATAR} alt={getAuthorDisplayName(featured[1].author)} className="w-6 h-6 rounded-full object-cover" />
                       <span className="text-xs font-semibold text-gray-700">
-                        {featured[1].author}
+                        {getAuthorDisplayName(featured[1].author)}
                       </span>
                     </div>
                   </div>
@@ -159,7 +162,7 @@ export default function NewsGrid() {
                       }`}
                     >
                       <p className="text-xs text-red-600 font-black uppercase mb-2">
-                        {article.category}
+                        {getCategoryLabel(article.category)}
                       </p>
                       <h4 className="text-sm font-black text-gray-900 line-clamp-3 hover:text-red-600">
                         {article.title}

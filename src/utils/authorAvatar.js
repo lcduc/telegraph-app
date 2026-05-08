@@ -1,0 +1,1 @@
+export const AUTHOR_AVATAR = '/images/z7804711785663_2127191c632add8fdd9210883527cb9a.jpg';

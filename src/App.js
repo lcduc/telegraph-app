@@ -69,7 +69,7 @@ function App() {
           {/* Copyright */}
           <div className="border-t border-gray-700 pt-8 max-w-7xl mx-auto px-4">
             <p className="text-gray-400 text-sm font-light">
-              © 2024 Telegraph Media Group. All rights reserved.
+              © 2026 lcduc Media Group. All rights reserved.
             </p>
           </div>
         </footer>

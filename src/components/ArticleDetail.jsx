@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { loadArticlesJson } from "../utils/loadArticlesJson";
+import { getCategoryLabel } from "../utils/getCategoryLabel";
+import { AUTHOR_AVATAR } from "../utils/authorAvatar";
+import { getAuthorDisplayName, getAuthorTitleLabel } from "../utils/authorDisplay";
 
 export default function ArticleDetail() {
   const { id } = useParams();
@@ -45,7 +48,7 @@ export default function ArticleDetail() {
           onClick={() => navigate("/")}
           className="text-blue-600 hover:underline mt-4"
         >
-          ← Back to Sport
+          ← Trở về trang chủ
         </button>
       </div>
     );
@@ -67,14 +70,14 @@ export default function ArticleDetail() {
           onClick={() => navigate("/")}
           className="text-blue-600 hover:underline text-sm mb-4"
         >
-          ← Back to Sport
+          ← Trở về trang chủ
         </button>
 
         {/* Category and Title */}
         <span
           className="text-xs text-red-600 font-black uppercase block mb-2"
         >
-          {article.category}
+          {getCategoryLabel(article.category)}
         </span>
         <h1
           className="text-5xl font-black text-gray-900 mb-4 leading-tight"
@@ -87,10 +90,10 @@ export default function ArticleDetail() {
           className="flex items-center gap-6 py-6 border-b-2 border-gray-200 mb-8"
         >
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gray-300" />
+            <img src={AUTHOR_AVATAR} alt={getAuthorDisplayName(article.author)} className="w-12 h-12 rounded-full object-cover" />
             <div>
-              <p className="font-bold text-gray-900">{article.author}</p>
-              <p className="text-xs text-gray-600">{article.authorTitle}</p>
+              <p className="font-bold text-gray-900">{getAuthorDisplayName(article.author)}</p>
+              <p className="text-xs text-gray-600">{getAuthorTitleLabel(article.authorTitle)}</p>
             </div>
           </div>
           <div>
@@ -239,7 +242,7 @@ export default function ArticleDetail() {
             className="bg-gray-50 p-8 rounded-lg"
           >
             <h3 className="text-xl font-black text-gray-900 mb-6">
-              More from {article.category}
+              Xem thêm về {getCategoryLabel(article.category)}
             </h3>
             <div className="space-y-4">
               {relatedArticles.map((relatedArticle) => (
@@ -252,7 +255,7 @@ export default function ArticleDetail() {
                   className="block w-full text-left hover:text-red-600 transition pb-4 border-b border-gray-200 last:border-b-0"
                 >
                   <p className="text-xs text-red-600 font-bold uppercase mb-1">
-                    {relatedArticle.category}
+                    {getCategoryLabel(relatedArticle.category)}
                   </p>
                   <p className="font-bold text-gray-900 hover:text-red-600">
                     {relatedArticle.title}

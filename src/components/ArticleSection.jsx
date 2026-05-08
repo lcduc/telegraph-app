@@ -1,3 +1,6 @@
+import { getCategoryLabel } from "../utils/getCategoryLabel";
+import { AUTHOR_AVATAR } from "../utils/authorAvatar";
+import { getAuthorDisplayName } from "../utils/authorDisplay";
 import { useNavigate } from 'react-router-dom';
 
 export default function ArticleSection({ articles }) {
@@ -22,8 +25,8 @@ export default function ArticleSection({ articles }) {
             <img src={left.image} alt={left.title} className="w-full h-full object-cover" />
           </div>
           <div className="p-4">
-            <p className="text-xs text-red-600 font-black uppercase mb-2">
-              {left.category}
+              <p className="text-xs text-red-600 font-black uppercase mb-2">
+                {getCategoryLabel(left.category)}
             </p>
             <h3 className="font-black text-sm leading-tight text-gray-900 mb-3 line-clamp-3">
               {left.title}
@@ -32,9 +35,9 @@ export default function ArticleSection({ articles }) {
               {left.excerpt}
             </p>
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-gray-300" />
+              <img src={AUTHOR_AVATAR} alt={getAuthorDisplayName(left.author)} className="w-6 h-6 rounded-full object-cover" />
               <span className="text-xs font-semibold text-gray-700">
-                {left.author}
+                {getAuthorDisplayName(left.author)}
               </span>
             </div>
           </div>
@@ -54,8 +57,8 @@ export default function ArticleSection({ articles }) {
             <img src={middle.image} alt={middle.title} className="w-full h-full object-cover" />
           </div>
           <div className="p-4">
-            <p className="text-xs text-red-600 font-black uppercase mb-2">
-              {middle.category}
+              <p className="text-xs text-red-600 font-black uppercase mb-2">
+                {getCategoryLabel(middle.category)}
             </p>
             <h3 className="font-black text-sm leading-tight text-gray-900 mb-3 line-clamp-3">
               {middle.title}
@@ -64,9 +67,9 @@ export default function ArticleSection({ articles }) {
               {middle.excerpt}
             </p>
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-gray-300" />
+              <img src={AUTHOR_AVATAR} alt={getAuthorDisplayName(middle.author)} className="w-6 h-6 rounded-full object-cover" />
               <span className="text-xs font-semibold text-gray-700">
-                {middle.author}
+                {getAuthorDisplayName(middle.author)}
               </span>
             </div>
           </div>
@@ -87,8 +90,8 @@ export default function ArticleSection({ articles }) {
                 index !== sidebar.length - 1 ? 'border-b border-gray-200' : ''
               }`}
             >
-              <p className="text-xs text-red-600 font-black uppercase mb-2">
-                {article.category}
+                <p className="text-xs text-red-600 font-black uppercase mb-2">
+                  {getCategoryLabel(article.category)}
               </p>
               <h4 className="text-sm font-black text-gray-900 line-clamp-3 hover:text-red-600">
                 {article.title}

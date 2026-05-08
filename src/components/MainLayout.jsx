@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BrandingAd from './BrandingAd';
 import { loadArticlesJson } from '../utils/loadArticlesJson';
+import { getCategoryLabel } from '../utils/getCategoryLabel';
 
 export default function MainLayout() {
   const navigate = useNavigate();
@@ -156,7 +157,7 @@ export default function MainLayout() {
                         {article.title}
                       </h3>
                       <div className="flex items-center justify-between mt-1 mb-2">
-                        <span className="text-xs text-red-600 font-bold uppercase">{article.category}</span>
+                        <span className="text-xs text-red-600 font-bold uppercase">{getCategoryLabel(article.category)}</span>
                       </div>
                       <p className="text-sm text-gray-600 line-clamp-3 leading-snug">
                         {article.excerpt}
@@ -181,7 +182,7 @@ export default function MainLayout() {
                     {mainFeatured.title}
                   </h3>
                   <div className="flex items-center gap-4 mb-2">
-                    <span className="text-xs text-red-600 font-bold uppercase">{mainFeatured.category}</span>
+                    <span className="text-xs text-red-600 font-bold uppercase">{getCategoryLabel(mainFeatured.category)}</span>
                   </div>
                   <p className="text-gray-600 leading-relaxed line-clamp-3">
                     {mainFeatured.excerpt}
@@ -209,7 +210,7 @@ export default function MainLayout() {
                       {article.title}
                     </h3>
                     <div className="flex items-center gap-4 mb-1 sm:mb-2">
-                      <span className="text-xs text-red-600 font-bold uppercase hidden sm:block">{article.category}</span>
+                      <span className="text-xs text-red-600 font-bold uppercase hidden sm:block">{getCategoryLabel(article.category)}</span>
                     </div>
                     <p className="text-sm text-gray-600 line-clamp-2 sm:line-clamp-3 hidden sm:block">
                       {article.excerpt}
@@ -275,7 +276,7 @@ export default function MainLayout() {
                         {article.title}
                       </h3>
                       <p className="text-xs text-red-600 mt-1 uppercase font-bold">
-                        {article.category}
+                        {getCategoryLabel(article.category)}
                       </p>
                     </div>
                   </div>
