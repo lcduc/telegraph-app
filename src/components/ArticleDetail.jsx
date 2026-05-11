@@ -97,7 +97,7 @@ export default function ArticleDetail() {
             </div>
           </div>
           <div>
-            <p className="text-sm text-gray-600">Published {article.date}</p>
+            <p className="text-sm text-gray-600">{article.date}</p>
           </div>
         </div>
 
