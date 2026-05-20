@@ -40,7 +40,7 @@ export default function Header() {
 
       {/* Centered Logo Section */}
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 flex justify-center">
+        <div className="max-w-7xl mx-auto px-4 flex justify-center my-4 md:my-6">
           <button
             onClick={() => {
               navigate("/");
@@ -49,9 +49,9 @@ export default function Header() {
             className="hover:opacity-80 transition-opacity duration-300 cursor-pointer bg-none border-none p-0"
           >
             <img
-              src="/images/z7788464965134_5b6dd779d99474abf69794e0e8f62502.jpg"
+              src="/images/z7837973747700_c3bd5440ee25f4cf0a65aa77d20a943c.jpg"
               alt="Logo"
-              className="h-24 w-auto object-contain"
+              className="h-24 md:h-28 w-auto object-contain"
             />
           </button>
         </div>
@@ -61,6 +61,16 @@ export default function Header() {
       <div className="bg-blue-900 text-white sticky top-0 z-50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex gap-6 overflow-x-auto py-2 text-xs font-bold whitespace-nowrap">
+            <button
+              type="button"
+              onClick={() => {
+                navigate("/");
+                window.scrollTo(0, 0);
+              }}
+              className="inline-block origin-left hover:text-yellow-300 transition-colors duration-300 hover:scale-110 transform"
+            >
+              Trang chủ
+            </button>
             <button
               type="button"
               onClick={() => goToCategory("football")}
